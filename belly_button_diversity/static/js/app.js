@@ -5,6 +5,19 @@ d3.json("../../data/samples.json").then((importedData) => {
     var sampleData = importedData.samples[0];
     console.log(sampleData);
 
+    //add options to button
+    var dropdown = document.getElementById("selDataset");
+    for (index in data.names) {
+        dropdown.options[dropdown.options.length] = new Option(data.names[index], index);
+    }
+
+    //populate demographic data
+    var demoData = data.metadata[0];
+    console.log(demoData);
+
+    Object.entries(demoData).forEach(([key, value]) => d3.select        ("#sample-metadata").text(`${key}: ${value}`));
+    // var indvDemoData = d3.select("#sample-metadata").text(Object.entries(demoData));
+    
     // sampleData.sort(function(a, b) {
     //     return b.sample_values - a.sample_values;
     // });
