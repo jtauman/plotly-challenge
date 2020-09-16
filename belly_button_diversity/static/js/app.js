@@ -1,21 +1,45 @@
 // Use D3 fetch to read the JSON file
+var data
 d3.json("../../data/samples.json").then((importedData) => {
-    //console.log(importedData);
-    var data = importedData;
-    var sampleData = importedData.samples[0];
-    console.log(sampleData);
+    console.log(importedData);
+    data = importedData;
+    // var sampleData = importedData.samples[0];
+    // console.log(sampleData);
 
-    //add options to button
+    //populate dataset options to button
     var dropdown = document.getElementById("selDataset");
     for (index in data.names) {
-        dropdown.options[dropdown.options.length] = new Option(data.names[index], index);
-    }
+        console.log(data.names[index])
+        dropdown.options[dropdown.options.length] = new Option(data.names[index], data.names[index]);
+    };
+
+    //Call updatePlotly when a change takes place to the DOM
+    
+     //d3.selectAll("#selDataset").on("change", getData);
+
+    // // This function is called when a dropdown menu item is selected
+    // function getData() {
+    //     // Use D3 to select the dropdown menu
+    //     var dropdownMenu = d3.select("#selDataset");
+    //     // Assign the value of the dropdown menu option to a variable
+    //     var subject = dropdownMenu.property("value");
+
+    //     // Call function to update the chart
+    //     updatePlotly(data);
+    // };
+
+    // // Update the restyled plot's values
+    // function updatePlotly(newdata) {
+    // Plotly.restyle("bar", "values", [newdata]);
 
     //populate demographic data
-    var demoData = data.metadata[0];
+    var demoData = data.metadata[0];    
     console.log(demoData);
 
-    Object.entries(demoData).forEach(([key, value]) => d3.select        ("#sample-metadata").text(`${key}: ${value}`));
+    Object.entries(demoData).forEach(([key, value]) => {
+        console.log(`${key}: ${value}`)
+        d3.select("#sample-metadata").append("h6").text(`${key}: ${value}`)
+    });
     // var indvDemoData = d3.select("#sample-metadata").text(Object.entries(demoData));
     
     // sampleData.sort(function(a, b) {
@@ -94,7 +118,15 @@ d3.json("../../data/samples.json").then((importedData) => {
 });
 
 
-
+function optionChanged (value){
+    d3.json("../../data/samples.json").then((importedData) => {
+        console.log(importedData)
+        var targetData = importedData.samples.filter(e => {
+            return e.id === value
+        })
+        console.log(targetData)
+    })
+};
 
     //initialize graphs
     // function init() {
