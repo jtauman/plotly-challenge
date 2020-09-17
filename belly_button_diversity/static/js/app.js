@@ -43,6 +43,28 @@ function init() {
 
         Plotly.newPlot("bar", dataBar, layoutBar);
 
+        //bubble plot trace
+        var sampleResults = data.samples[0].sample_values;
+        var otuIDs = data.samples[0].otu_ids;
+        var otuLabels = data.samples[0].otu_labels;
+        var traceBubble = {
+            x: data.samples[0].otu_ids,
+            y: sampleResults,
+            mode: 'markers',
+            marker: {color: otuIDs, size: sampleResults, sizeref: 1.2},
+            text: otuLabels
+        };
+
+        var layoutBubble = {
+            title: "Belly Button Bacteria Counts",
+            xaxis: {title: "OTU IDs"},
+            yaxis: {title: "Bacteria Counts"}
+        }
+
+        var data2 = [traceBubble];
+
+        Plotly.newPlot("bubble", data2, layoutBubble)
+
         //populate demographic data
         var demoData = data.metadata[0];    
         console.log("demoData:" , demoData);
@@ -77,7 +99,7 @@ function optionChanged (value){
         var newStringOtuIDs = newTopOTUs.map(i => "OTU " + i);
         var newTopOTULabels = newSampleData[0].otu_labels.slice(0,10);
 
-        //horizontal bargraph trace
+        //update horizontal bargraph trace
         var traceBar = {
             x: newTopResults.reverse(),
             y: newStringOtuIDs.reverse(),
@@ -92,8 +114,30 @@ function optionChanged (value){
         }
 
         var dataBar = [traceBar];
-
+        //plot the updated bar graph
         Plotly.newPlot("bar", dataBar, layoutBar);
+
+        //update bubbleplot
+        var newSampleResults = targetSampleData[0].sample_values;
+        var newOtuIDs = targetSampleData[0].otu_ids;
+        var newOtuLabels = targetSampleData[0].otu_labels;
+        var traceBubble = {
+            x: newOtuIDs,
+            y: newSampleResults,
+            mode: 'markers',
+            marker: {color: newOtuIDs, size: newSampleResults, sizeref: 1.2},
+            text: newOtuLabels
+        };
+
+        var layoutBubble = {
+            title: "Belly Button Bacteria Counts",
+            xaxis: {title: "OTU IDs"},
+            yaxis: {title: "Bacteria Counts"}
+        }
+
+        var data2 = [traceBubble];
+
+        Plotly.newPlot("bubble", data2, layoutBubble)
 
         //populate demographic data
         var newMetaData = Object.values(targetData);    
