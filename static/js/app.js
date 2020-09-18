@@ -2,7 +2,7 @@
 function init() {
     // Use D3 fetch to read the JSON file
     var data
-    d3.json("../../data/samples.json").then((importedData) => {
+    d3.json("../../samples.json").then((importedData) => {
         console.log(importedData);
         data = importedData;
         // var sampleData = importedData.samples[0];
