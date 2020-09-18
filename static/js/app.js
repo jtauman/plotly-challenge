@@ -79,7 +79,7 @@ function init() {
 init()
 
 function optionChanged (value){
-    d3.json("../../data/samples.json").then((importedData) => {
+    d3.json("../../samples.json").then((importedData) => {
         console.log(importedData)
         //filter metadata
         var targetData = importedData.metadata.filter(e => {
