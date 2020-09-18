@@ -7,3 +7,6 @@ This challenge focuses on creating a dashboard for data gathered by the Rob Dunn
 My Belly Button Biodiversity [dashboard](https://jtauman.github.io/plotly-challenge/) provides options to select a volunteer suject, which then returns basic demographic data from the subject, a bar chart of the top 10 microbes found within the subject's belly button, and a bubble plot returning all microbes found for that volunteer.
 
 
+
+![Dashboard](/images/dashboard.png)
+
