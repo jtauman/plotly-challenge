@@ -2,7 +2,7 @@
 function init() {
     // Use D3 fetch to read the JSON file
     var data
-    d3.json("../../samples.json").then((importedData) => {
+    d3.json("samples.json").then((importedData) => {
         console.log(importedData);
         data = importedData;
         // var sampleData = importedData.samples[0];
@@ -79,7 +79,7 @@ function init() {
 init()
 
 function optionChanged (value){
-    d3.json("../../samples.json").then((importedData) => {
+    d3.json("samples.json").then((importedData) => {
         console.log(importedData)
         //filter metadata
         var targetData = importedData.metadata.filter(e => {
